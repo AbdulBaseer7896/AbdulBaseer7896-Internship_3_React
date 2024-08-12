@@ -1,20 +1,28 @@
+import ExpenseItem from "./Components/ExpenseItem";
+import Home from "./Components/Home";
 import Login from "./Components/Login";
-import Profile from "./Components/Profile";
-import Text from "./Components/Text";
+import SignUp from "./Components/SignUp";
 import UserContextProvider from "./Context/UserContextProvider";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 function App() {
   return (
-    <>
     <UserContextProvider>
-    <h1>React with us</h1>
-    <Login/>
-    <Profile/>
-    <Text />
-
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+         <Route path='/Login' element={<Login />} />
+       <Route path='/SignUp' element={<SignUp />} />
+       <Route path='/Expense/:id' element={<ExpenseItem />} />
+        {/* <Route path='/' element={<ProtectedRoutes />}>
+          <Route path='/Expense/:id' element={<ExpenseItem />} />
+        </Route>
+        <Route path='*' element={<Login />} /> */}
+      </Routes>
+    </BrowserRouter>
     </UserContextProvider>
-    </>
+  
   );
 }
 
