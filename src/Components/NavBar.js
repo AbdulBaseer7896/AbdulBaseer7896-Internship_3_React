@@ -11,9 +11,9 @@ import UserContext from '../Context/UserContext';
 export default function NavBar() {
 
     const [allUsers, setAllUser] = useState([]);
-    const [userName, setUserName] = useState('');
     const [menuVisible, setMenuVisible] = useState(false);
     const { user, setUser } = useContext(UserContext);
+    console.log(allUsers)
 
     const navigate = useNavigate();
 
@@ -23,14 +23,6 @@ export default function NavBar() {
         setAllUser(data);
     }, []);
 
-    // useEffect(() => {
-    //     if (user && allUsers.length > 0) {
-    //         const nameData = allUsers.find((person) => person.email === user.userName);
-    //         setUserName(nameData ? nameData.name : '');
-    //     } else {
-    //         setUserName('');
-    //     }
-    // }, [user, allUsers]);
 
 
     const handleMenu = () => {
