@@ -29,7 +29,7 @@ const cartSlice = createSlice({
                     image: newItem.image
                 })
             }
-            state.totalPrice = newItem.price
+            state.totalPrice += newItem.price
             state.totalQuantity++
         },
 

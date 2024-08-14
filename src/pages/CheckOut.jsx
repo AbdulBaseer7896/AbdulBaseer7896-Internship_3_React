@@ -1,13 +1,38 @@
 import React, { useState } from 'react'
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const CheckOut = () => {
+const CheckOut = ({setOrder}) => {
     const [billingToggle , setBillingToggle] = useState(true)
     const [shippingToggle , setShippingToggle] = useState(true)
     const [paymentToggle , setPaymentToggle] = useState(true)
     const [paymentMethod , setPaymentMethod] = useState("cod")
+
+    const [billingInfo , setBillingInfo] = useState({
+        name: '',
+        email: '',
+        phone: ''
+    })
+    const [shippingInfo , setShippingInfo] = useState({
+            address: '',
+            city: '',
+            zip: ''
+        })
+
     const cart = useSelector(state => state.cart)
+    const navigate = useNavigate()
+    const handleOrder = ()=>{
+        const newOrder = {
+            products : cart.products,
+            orderNumber :"1234",
+            shippingInformation : shippingInfo,
+            BillingInfo : billingInfo,
+            totalPrice: cart.totalPrice
+        }
+        setOrder(newOrder)
+        navigate("/order-confirmation")
+    }
   return (
     <div className='container mx-auto py-8 min-h-96 px-4 md:px-16 lg:px-24'>
             <h3 className='text-2xl font-semibold mb-4'>CHECK OUT</h3>
@@ -23,15 +48,15 @@ const CheckOut = () => {
                         <div className={`space-y-4 ${billingToggle ? "" : "hidden"}`}>
                             <div>
                                 <labe className="block text-gray-700" htmlFor="">Name</labe>
-                                <input className='w-full px-3 py-2 border' type="text" name="name" placeholder='Enter Name' />
+                                <input onChange={(e)=>setBillingInfo({...billingInfo, name: e.target.value})} className='w-full px-3 py-2 border' type="text" name="name" placeholder='Enter Name' />
                             </div>
                             <div>
                                 <label className='block text-gray-700' htmlFor="">Email</label>
-                                <input  className='w-full px-3 py-2 border' placeholder='Enter Email' type="email" name="email" />
+                                <input onChange={(e)=>setBillingInfo({...billingInfo, email: e.target.value})}  className='w-full px-3 py-2 border' placeholder='Enter Email' type="email" name="email" />
                             </div>
                             <div>
                                 <label  className='block text-gray-700' htmlFor="">Phone</label>
-                                <input  className='w-full px-3 py-2 border' type="text" name="phone" placeholder='Enter Phone #' />
+                                <input onChange={(e)=>setBillingInfo({...billingInfo, phone: e.target.value})} className='w-full px-3 py-2 border' type="number" name="phone" placeholder='Enter Phone #' />
                             </div>
 
                         </div>
@@ -47,15 +72,15 @@ const CheckOut = () => {
                         <div className={`space-y-4 ${shippingToggle ? "" : "hidden"}`}>
                             <div>
                                 <labe className="block text-gray-700" htmlFor="">Address</labe>
-                                <input className='w-full px-3 py-2 border' type="text" name="name" placeholder='Enter Address' />
+                                <input onChange={(e)=>setShippingInfo({...shippingInfo, address: e.target.value})} className='w-full px-3 py-2 border' type="text" name="Address" placeholder='Enter Address' />
                             </div>
                             <div>
                                 <label className='block text-gray-700' htmlFor="">City</label>
-                                <input  className='w-full px-3 py-2 border' placeholder='Enter City Name' type="email" name="email" />
+                                <input  onChange={(e)=>setShippingInfo({...shippingInfo, city: e.target.value})} className='w-full px-3 py-2 border' placeholder='Enter City Name' type="city" name="email" />
                             </div>
                             <div>
                                 <label  className='block text-gray-700' htmlFor="">Zip Code</label>
-                                <input  className='w-full px-3 py-2 border' type="text" name="phone" placeholder='Enter Zip Code ' />
+                                <input onChange={(e)=>setShippingInfo({...shippingInfo, zip: e.target.value})}  className='w-full px-3 py-2 border' type="text" name="zip" placeholder='Enter Zip Code ' />
                             </div>
 
                         </div>
@@ -133,7 +158,7 @@ const CheckOut = () => {
                         <span className='font-semibold'>${cart.totalPrice.toFixed(2)}</span>
                     </div>
                 </div>
-                    <button className='w-full bg-red-600 py-2 rounded-md text-white mt-6 hover:bg-red-800'>
+                    <button onClick={handleOrder} className='w-full bg-red-600 py-2 rounded-md text-white mt-6 hover:bg-red-800'>
                         place Order
                     </button>
                 </div>
