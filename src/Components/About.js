@@ -12,6 +12,7 @@ const About = () => {
     <div>
       <h1>I am about page</h1>
       <p>{data.state.name} that is</p>
+      
       {data.changeName()}
       <p>{data.state.name} this is</p>
 
