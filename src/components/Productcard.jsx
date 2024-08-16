@@ -20,9 +20,10 @@ const Productcard = ({ product }) => {
     };
 
     return (
-        <Link to={isLoggedIn ? `/DisplayProduct/${product.id}` : ''}>
-            <div className='bg-white p-4 shadow rounded relative border transform transition-transform duration-300 hover:scale-105'>
-                <img className='w-full h-48 object-contain mb-4' src={product.image} alt="" />
+        <div className='bg-white p-4 shadow rounded relative border transform transition-transform duration-300 hover:scale-105'>
+                <Link to={isLoggedIn ? `/DisplayProduct/${product.id}` : ''}>
+                    <img className='w-full h-48 object-contain mb-4' src={product.image} alt="" />
+                </Link>
                 <h3 className='text-lg font-semibold'>{product.title}</h3>
                 <p className='text-gray-500'>${product.price}</p>
                 <div className='flex items-center mt-2'>
@@ -41,7 +42,6 @@ const Productcard = ({ product }) => {
                     )}
                 </div>
             </div>
-        </Link>
     );
 }
 

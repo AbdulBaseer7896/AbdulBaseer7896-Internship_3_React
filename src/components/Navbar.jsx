@@ -64,14 +64,14 @@ const Navbar = () => {
                     </form>
                 </div>
                 <div className='flex items-center space-x-4'>
-                    <Link to="/cart" className='relative'>
-                        <FaShoppingCart className='text-lg' />
                         {products.length > 0 && (
-                            <span className='absolute top-0 text-xs left-3 bg-red-600 rounded-full flex justify-center items-center text-white'>
+                            <Link to="/cart" className='relative'>
+                        <FaShoppingCart className='text-lg' />
+                            <span className='absolute -top-2 text-sm left-4 px-1 bg-red-600 rounded-full flex justify-center items-center text-white'>
                                 {products.length}
                             </span>
-                        )}
                     </Link>
+                        )}
 
                     {isLoggedIn ? (
                         <button className='hidden md:block' onClick={handleLogout}>
