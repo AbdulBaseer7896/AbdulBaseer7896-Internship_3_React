@@ -8,7 +8,6 @@ import { mockData } from "../assets/mockData"
 import { useDispatch, useSelector } from 'react-redux'
 import Productcard from '../components/Productcard'
 import Shop from './Shop'
-import { Link } from 'react-router-dom'
 
 const Home = () => {
 

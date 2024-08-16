@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaStar } from 'react-icons/fa'
 import { addToCart } from '../redux/cartSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Productcard = ({product}) => {
@@ -14,6 +14,8 @@ const Productcard = ({product}) => {
     alert("Product Added SuccessFull ")
   }
 
+  const { email, password, isLoggedIn } = useSelector((state) => state.user);
+  console.log("this si the email and page = " , email , password , isLoggedIn)
   return (
     <Link to={`/DisplayProduct/${product.id}`}>
     <div className='bg-white p-4 shadow rounded relative border transform transition-transform duration-300 hover:scale-105'>

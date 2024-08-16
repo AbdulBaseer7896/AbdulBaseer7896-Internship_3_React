@@ -65,7 +65,7 @@ const Navbar = () => {
             <Link to={"/"} className='hover:underline'>About</Link>
         </div>
         <Model  isModelOpen={isModelOpen} setIsModelOpen={setIsModelOpen}>
-            {isLogin ? <Login openSignUp={openSignUp}/> : <Register openLogin={openLogin}/>}
+            {isLogin ? <Login openSignUp={openSignUp} setIsModelOpen={setIsModelOpen}/> : <Register openLogin={openLogin}/>}
         </Model>
     </nav>
   )
