@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/loginSlice';
 import { useNavigate } from 'react-router-dom';
@@ -9,15 +9,24 @@ const Login = ({ openSignUp , setIsModelOpen }) => {
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [allUsers, setAllUsers] = useState([]);
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
+
+    useEffect(() => {
+        // Retrieve stored data from localStorage when the component mounts
+        const data = JSON.parse(localStorage.getItem("UserStoreData")) || [];
+        setAllUsers(data);
+      }, []);
   
     const { isLoggedIn } = useSelector((state) => state.user);
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(login({ email, password }));
+        dispatch(login({ email, password , allUsers }));
     
         if (isLoggedIn) {
           navigate('/Shop');

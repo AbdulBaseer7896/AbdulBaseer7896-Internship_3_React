@@ -6,6 +6,7 @@ import Model from './Model'
 import Login from './Login'
 import Register from './Register'
 import { setSearchTerm } from '../redux/productSlice'
+import { logout } from '../redux/loginSlice'
 
 const Navbar = () => {
     const [isModelOpen , setIsModelOpen]  = useState(false)
@@ -27,7 +28,12 @@ const Navbar = () => {
         setIsLogin(true)
         setIsModelOpen(true)
     }
+    const handleLogout = () => {
+        dispatch(logout()); // Dispatch the logout action
+        navigate('/'); // Redirect to the homepage or any other page after logout
+    };
     const products = useSelector(state=> state.cart.products)
+    const { isLoggedIn } = useSelector((state) => state.user);
   return (
     <nav className='bg-white shadow-md'>
         <div className='container mx-auto px-3 md:px-16 lg:px-24 py-4 flex justify-between items-center'>
@@ -49,9 +55,16 @@ const Navbar = () => {
                         </span>
                     )}
                 </Link>
+
+                {isLoggedIn ? 
+                 <button className='hidden md:block' onClick={handleLogout} >
+                 LogOut
+                </button>
+                :
                 <button className='hidden md:block' onClick={()=>setIsModelOpen(true)}>
                     Login | Register
                 </button>
+                }
                 <button>
                     <FaUser/>
                 </button>

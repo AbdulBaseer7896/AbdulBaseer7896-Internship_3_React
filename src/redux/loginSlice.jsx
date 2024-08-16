@@ -1,17 +1,14 @@
 // src/features/user/userSlice.js
 
 import { createSlice } from '@reduxjs/toolkit';
-import { useNavigate } from "react-router-dom";
 
 
-
-const initialState = {
-  email: null,
-  password: null,
-  isLoggedIn: false,
-};
-
-
+  const initialState = {
+    email: localStorage.getItem('email') || null,
+    password: localStorage.getItem('password') || null,
+    isLoggedIn: localStorage.getItem('isLoggedIn') === 'true' || false,
+  };    
+  
 
 const userSlice = createSlice({
 
@@ -20,10 +17,20 @@ const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       const { email, password } = action.payload;
-      if (email === 'abdulbasirqazi@gmail.com' && password === 'basir123') {
+      const allUsers = action.payload.allUsers;
+
+      let ifEmail = allUsers.some((person) => person.email === email);
+      let ifPassword = allUsers.some((person) => person.password === password);
+      
+      if (ifEmail && ifPassword) {
         state.email = email;
         state.password = password;
         state.isLoggedIn = true;
+
+        // Save to localStorage
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+        localStorage.setItem('isLoggedIn', 'true');
       }
       else{
         alert("your Email or password is wrong !!!")
@@ -33,6 +40,10 @@ const userSlice = createSlice({
       state.email = null;
       state.password = null;
       state.isLoggedIn = false;
+
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+      localStorage.removeItem('isLoggedIn');
     },
   },
 });
