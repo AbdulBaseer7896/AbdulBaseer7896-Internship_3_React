@@ -202,7 +202,6 @@
 
 
 
-import React, { useRef } from 'react';
 import Navbar from '../components/NavBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetTyping } from '../redux/slices/Filter';
@@ -213,7 +212,6 @@ import jsPDF from 'jspdf';
 const ResultPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const reportRef = useRef(null);
 
     const accuracy = useSelector((state) => state.filter.accuracy);
     const elapsedTime = useSelector((state) => state.filter.elapsedTime);
@@ -322,7 +320,7 @@ const ResultPage = () => {
           };
 
           try {
-              const response = await fetch('http://127.0.0.1:5000/uploadResult', {
+              const response = await fetch('https://typingclub.onrender.com/uploadResult', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json'

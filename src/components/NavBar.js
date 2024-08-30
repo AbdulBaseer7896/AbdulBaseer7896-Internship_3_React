@@ -15,7 +15,6 @@ const Navbar = () => {
 
     const [isModelOpen, setIsModelOpen] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
-    const [search, setSearch] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const openSignUp = () => {
@@ -33,7 +32,7 @@ const Navbar = () => {
         dispatch(logout()); // Dispatch the logout action
         navigate('/'); // Redirect to the homepage or any other page after logout
     };
-    const { email, isLoggedIn } = useSelector(state => state.user || { email: '', isLoggedIn: false });
+    const {  isLoggedIn } = useSelector(state => state.user || { email: '', isLoggedIn: false });
 
 
     return (

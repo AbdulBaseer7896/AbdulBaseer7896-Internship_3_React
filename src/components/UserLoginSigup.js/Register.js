@@ -29,7 +29,7 @@ const Register = ({ openLogin }) => {
       return;
     }
 
-    fetch('http://127.0.0.1:5000/SignUp', {
+    fetch('https://typingclub.onrender.com/SignUp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

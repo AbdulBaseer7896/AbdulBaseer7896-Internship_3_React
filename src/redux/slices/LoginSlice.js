@@ -18,7 +18,7 @@ export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/login`, {
+      const response = await fetch(`https://typingclub.onrender.com/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ const userSlice = createSlice({
       localStorage.removeItem("password");
       localStorage.removeItem("isLoggedIn");
 
-      fetch('http://127.0.0.1:5000/api/logout', { method: 'POST', credentials: 'include' , mode: "cors", headers: {
+      fetch('https://typingclub.onrender.com/api/logout', { method: 'POST', credentials: 'include' , mode: "cors", headers: {
         "Content-Type": "application/json",
         }, })
         .then(response => response.json())

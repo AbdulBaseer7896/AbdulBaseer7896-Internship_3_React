@@ -9,7 +9,7 @@ const Ranking = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/Ranking');
+        const response = await fetch('https://typingclub.onrender.com/Ranking');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
