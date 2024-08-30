@@ -1,0 +1,7 @@
+Flask
+mysql.connector
+pymysql
+gunicorn
+flask_login
+pytz
+flask_cors
